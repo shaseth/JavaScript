@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spotify Top Artists/Tracks</title>
+</head>
+<body>
+  <h1>Spotify Top Artists/Tracks</h1>
+
+  <form id="timePeriodForm">
+    <label for="daysBack">Select Days Back:</label>
+    <input type="number" id="daysBack" name="daysBack" min="1" max="30" required>
+    <button type="submit">Get Top Artists/Tracks</button>
+  </form>
+
+  <div id="resultContainer"></div>
+
+  <script>
+    // Function to handle form submission
+    function handleFormSubmission(event) {
+      event.preventDefault();
+
+      const daysBack = document.getElementById('daysBack').value;
+
+      // Perform API request to retrieve top artists or tracks using 'daysBack' value
+      // Replace this section with your actual API call to the Spotify API
+
+      // Mock response for demonstration purposes
+      const mockResponse = {
+        data: [
+          { name: 'Artist 1', popularity: 80 },
+          { name: 'Artist 2', popularity: 75 },
+          { name: 'Artist 3', popularity: 70 }
+        ]
+      };
+
+      // Display the results on the web page
+      displayResults(mockResponse.data);
+    }
+
+    // Function to display the results on the web page
+    function displayResults(data) {
+      const resultContainer = document.getElementById('resultContainer');
+      resultContainer.innerHTML = ''; // Clear previous results
+
+      if (data.length > 0) {
+        const resultHeader = document.createElement('h2');
+        resultHeader.textContent = 'Top Artists/Tracks';
+
+        const resultList = document.createElement('ul');
+
+        data.forEach((item) => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${item.name} (Popularity: ${item.popularity})`;
+          resultList.appendChild(listItem);
+        });
+
+        resultContainer.appendChild(resultHeader);
+        resultContainer.appendChild(resultList);
+      } else {
+        resultContainer.textContent = 'No results found.';
+      }
+    }
+
+    // Add event listener to the form submission
+    const form = document.getElementById('timePeriodForm');
+    form.addEventListener('submit', handleFormSubmission);
+  </script>
+</body>
+</html>
